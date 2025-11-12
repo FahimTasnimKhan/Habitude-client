@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ShoppingBag, Package2, Truck, Sprout } from 'lucide-react';
+
 import marketplaceImage from '../../assets/Logo/marketplace.jpg';
 import farmersImage from '../../assets/Logo/farmers-success.jpg';
 
@@ -8,56 +8,63 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ServiceCard from './ServiceCard';
 import FeaturedShowcase from './FeaturedShowcase';
+import { Bell, CheckSquare, LineChart, Target } from 'lucide-react';
 
 const services = [
   {
-    icon: ShoppingBag,
-    title: 'Retail Marketplace',
+    icon: CheckSquare,
+    title: 'Habit Creation',
     description:
-      'Direct-to-consumer sales with competitive pricing and fresh produce delivery.',
+      'Add new habits to your daily routine and start building consistency and productivity.',
     features: [
-      'Fresh Produce',
-      'Competitive Pricing',
-      'Quality Assured',
-      'Home Delivery',
+      'Custom Habit Setup',
+      'Multiple Categories',
+      'Daily / Weekly Goals',
+      'Quick Add',
     ],
-    color: 'bg-green-700',
+    color: 'bg-red-500',
   },
   {
-    icon: Package2,
-    title: 'Wholesale Trading',
+    icon: Bell,
+    title: 'Smart Reminders',
     description:
-      'Bulk purchasing for restaurants, distributors, and businesses with special rates.',
+      'Never miss a habit with intelligent notifications and scheduling options.',
     features: [
-      'Bulk Orders',
-      'Business Rates',
-      'Contract Farming',
-      'Supply Chain',
+      'Daily Reminders',
+      'Push Notifications',
+      'Custom Schedules',
+      'Snooze / Repeat',
     ],
-    color: 'bg-amber-600',
+    color: 'bg-yellow-500',
   },
   {
-    icon: Truck,
-    title: 'Logistics Support',
+    icon: LineChart,
+    title: 'Progress Analytics',
     description:
-      'End-to-end logistics from farm to market with cold chain management and tracking.',
-    features: ['Cold Storage', 'Transportation', 'Packaging', 'Tracking'],
-    color: 'bg-blue-700',
+      'Track your progress and visualize your performance with insightful charts and graphs.',
+    features: [
+      'Daily / Weekly Stats',
+      'Completion Charts',
+      'Streak Analysis',
+      'Habit Trends',
+    ],
+    color: 'bg-blue-500',
   },
   {
-    icon: Sprout,
-    title: 'Smart Farming',
+    icon: Target,
+    title: 'Streak Tracking',
     description:
-      'Data-driven crop management powered by IoT and AI to increase efficiency and yield.',
+      'Monitor streaks and milestones to stay motivated and maintain long-term consistency.',
     features: [
-      'Soil Analysis',
-      'Pest Alerts',
-      'AI Insights',
-      'Yield Prediction',
+      'Longest Streaks',
+      'Goal Milestones',
+      'Achievements & Badges',
+      'Motivational Alerts',
     ],
-    color: 'bg-emerald-600',
+    color: 'bg-green-500',
   },
 ];
+
 
 const Services = () => {
   // Initialize AOS with same config as HowItWorks for consistency
