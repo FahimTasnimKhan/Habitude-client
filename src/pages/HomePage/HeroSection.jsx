@@ -81,7 +81,7 @@ const HeroSection = () => {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-snug sm:leading-tight"
               data-aos="fade-right"
             >
-              Build Consistency, <br />
+              Build Regularity, <br />
               <span className="text-[#EF4444]">Celebrate Wins</span>
             </h1>
 
