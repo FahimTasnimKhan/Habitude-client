@@ -1,3 +1,4 @@
+import Features from './Features';
 import HeroSection from './HeroSection';
 
 const Home = () => {
@@ -5,9 +6,9 @@ const Home = () => {
     <>
       {/* <MarqueeSection /> */}
       <HeroSection />
-      {/* <WeatherForecastSection />
+      {/* <WeatherForecastSection /> */}
       <Features />
-      <HowItWorks />
+      {/* <HowItWorks />
       <AdvertisementSection />
       <Services />
       <LatestReviews />
