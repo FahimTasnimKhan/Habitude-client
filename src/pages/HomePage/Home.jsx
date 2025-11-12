@@ -1,5 +1,6 @@
 import Features from './Features';
 import HeroSection from './HeroSection';
+import HowItWorks from './HowItWorks';
 
 const Home = () => {
   return (
@@ -8,8 +9,8 @@ const Home = () => {
       <HeroSection />
       {/* <WeatherForecastSection /> */}
       <Features />
-      {/* <HowItWorks />
-      <AdvertisementSection />
+      <HowItWorks />
+      {/* <AdvertisementSection />
       <Services />
       <LatestReviews />
       <FarmerSuccessStoriesSection />
