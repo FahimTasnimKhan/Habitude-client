@@ -7,7 +7,7 @@ const NavButton = ({ label, icon: Icon, address, onClick, textSize }) => {
       <NavLink
         to={address}
         onClick={onClick}
-        className={` btn bg-transparent border-0 btn-color shadow-none tracking-wider text-${textSize} `}
+        className={` btn bg-transparent border-0 btn-color text-white shadow-none tracking-wider text-${textSize} `}
       >
         {Icon && <Icon size={20} />}
         {label}

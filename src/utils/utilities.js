@@ -1,35 +1,20 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
+import UseAxiosSecure from '../axios/UseAxiosSecure';
 
-export const imageUpload = async (imageFile) => {
-  const imageFormData = new FormData();
-  imageFormData.append("image", imageFile);
-
+const axiosSecure = UseAxiosSecure();
+export const registerUsertoDB = async (payload) => {
   try {
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      imageFormData
-    );
-    return data?.data?.display_url;
+    const response = await axiosSecure.post('/api/users', payload);
+    console.log(response);
   } catch (error) {
-    console.error("Image upload failed:", error);
-    // throw new Error("Image upload failed");
+    console.log(error);
   }
 };
 
-export const saveUserToDatabase = async(userData) => {
-  const {data} = await axios.post(`${import.meta.env.VITE_Server_API_KEY}/users/save-user`, userData);
-  console.log(data)
-};
-
-
-  export const TabTitle = (newTitle) => {
-    return document.title = newTitle;
-  }
-
-  export const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+export const fileToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 };

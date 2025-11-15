@@ -1,10 +1,50 @@
 import { GoPasskeyFill } from 'react-icons/go';
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
 import InputField from '../../components/Input Field/Input Field';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
+import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/UseAuth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { signIn } = useAuth();
+  // Hook from react-hook-form
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+    reset,
+  } = useForm();
+  // OnSubmit Function
+  const onSubmit = async (data) => {
+    await toast
+      .promise(
+        (async () => {
+          console.log(data);
+          const email = data?.userEmail;
+          const password = data?.password;
+          console.log(email, password);
+
+          // 1️⃣ Sign in the user
+          await signIn(email, password);
+
+          // 2️⃣ Reset the form
+          reset();
+
+          // 3️⃣ Return a message for the success toast
+          return 'Successfully Logged In';
+        })(),
+        {
+          loading: 'Logging in...',
+          success: (msg) => msg, // shows "Successfully Logged In"
+          error: 'Failed to login. Please try again.',
+        }
+      )
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div>
       <div
@@ -18,13 +58,15 @@ const Login = () => {
         </div>
 
         {/* Login Form (UI only) */}
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-3">
             {/* Email Input */}
             <InputField
+              register={register}
               label="User Email"
               name="userEmail"
               type="email"
+              errors={errors}
               placeholder="xyz@gmail.com"
               icon={FaEnvelope}
             />
@@ -32,7 +74,9 @@ const Login = () => {
             {/* Password Input */}
             <InputField
               label="Password"
+              register={register}
               name="password"
+              errors={errors}
               type="password"
               placeholder="Enter your password"
               icon={FaLock}
@@ -48,7 +92,7 @@ const Login = () => {
 
           {/* Submit Button */}
           <button
-            type="button"
+            type="submit"
             className="border group cursor-pointer rounded-lg bg-[#3E4B24]/80 hover:bg-[#4E5D2E] text-white pl-4 p-2 w-full  
               focus:outline-none focus:ring-2 focus:ring-[#3E4B24] 
               border-white/30 bg-white/10 text-white hover:bg-[#3E4B24]/50 

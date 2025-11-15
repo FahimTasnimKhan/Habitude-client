@@ -1,80 +1,40 @@
-// ---------------------------------------------------------------------------
-// Input Field Component - UI Only (No register, No errors)
-// ---------------------------------------------------------------------------
-
 const InputField = ({
-  name,
   label,
-  icon: Icon,
+  name,
   type,
   placeholder,
-  defaultValue,
-  rows = 3,
-  options = [],
+  icon: Icon,
+  register,
+  errors,
+  validationRules,
 }) => {
-  const isTextArea = type === 'textarea';
-  const isSelect = type === 'select';
-
-  const baseStyle = 'border border-gray-300 text-white bg-white/10 rounded-lg';
-
   return (
-    <div>
-      {/* Label */}
-      <label htmlFor={name} className="text-[#E6EAD0]/90 text-sm font-medium">
+    <div className="mb-2">
+      <label htmlFor={name} className="block text-sm font-medium mb-1">
         {label}
       </label>
 
-      {/* Wrapper */}
-      <div className="relative">
-        {/* Icon */}
+      <div className="relative rounded-md shadow-sm">
         {Icon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-            <Icon />
+            <Icon className="h-5 w-5 text-white" />
           </div>
         )}
 
-        {/* TextArea */}
-        {isTextArea ? (
-          <textarea
-            id={name}
-            name={name}
-            placeholder={placeholder}
-            rows={rows}
-            defaultValue={defaultValue}
-            className={`${baseStyle} mt-1 block w-full px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 sm:text-sm`}
-          ></textarea>
-        ) : isSelect ? (
-          /* Select Field */
-          <select
-            id={name}
-            name={name}
-            defaultValue=""
-            className={`${baseStyle} mt-1 block w-full px-3 py-2 shadow-sm focus:outline-none sm:text-sm`}
-          >
-            <option value="">
-              {placeholder || `Select a ${label.toLowerCase()}`}
-            </option>
-
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        ) : (
-          /* Standard Input */
-          <input
-            type={type}
-            id={name}
-            name={name}
-            placeholder={placeholder}
-            defaultValue={defaultValue}
-            className={`${baseStyle} w-full p-2 ${
-              Icon ? 'pl-10' : 'pl-4'
-            } focus:outline-none focus:ring-2 focus:ring-[#A3B18A] placeholder:text-white/60`}
-          />
-        )}
+        <input
+          id={name}
+          type={type}
+          placeholder={placeholder}
+          className={`block w-full ${
+            Icon ? 'pl-10' : 'pl-3'
+          } pr-3 py-2 border rounded-md bg-white/10 text-white`}
+          {...register(name, validationRules)}
+        />
       </div>
+
+      {errors[name] && (
+        <p className="text-red-500 text-sm">{errors[name].message}</p>
+      )}
     </div>
   );
 };

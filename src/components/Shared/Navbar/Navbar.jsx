@@ -3,33 +3,26 @@ import HamburgerButton from './HamburgerButton';
 import NavMenuGeneral from './NavMenuGeneral';
 
 const Navbar = () => {
-  //   const { theme } = useTheme();
-  //   const navStyle =
-  //     theme === 'dark'
-  //       ? 'w-full fg-dark border-b border-white'
-  //       : 'w-full navbar-light border-b border-white';
   return (
-    <>
-      <div className={``}>
-        <div className="w-11/12 flex justify-between items-center mx-auto py-2">
-          {/*Logo Section ------------------- */}
-          <div>
-            <HabitudeLogo />
-          </div>
+    <nav className="fixed w-full z-50 backdrop-blur-lg bg-white/10 border-b border-white/20">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+        {/* Logo */}
+        <div className="flex items-center">
+          <HabitudeLogo />
+        </div>
 
-          {/*Nav Links In Large Screen ----------------------- */}
-          <div className="hidden lg:flex items-center gap-2">
-            <NavMenuGeneral />
-            {/* <NavAvatar /> */}
-          </div>
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center gap-6">
+          <NavMenuGeneral />
+          {/* Future avatar or buttons can go here */}
+        </div>
 
-          {/*Hamburger Menu In Small Screen ----------------------- */}
-          <div className="flex lg:hidden">
-            <HamburgerButton />
-          </div>
+        {/* Mobile Hamburger */}
+        <div className="flex lg:hidden">
+          <HamburgerButton />
         </div>
       </div>
-    </>
+    </nav>
   );
 };
 
