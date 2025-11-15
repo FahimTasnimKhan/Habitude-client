@@ -20,12 +20,16 @@ const NavMenuGeneral = () => {
   return (
     <>
       <div className="flex justify-center items-center gap-2 ">
-        <NavButton className='' label="Home" address="/" />
-        <NavButton className='' label="About Us" address="/about" />
-        <NavButton className='' label="Contact Us" address="/contact" />
-        <NavButton className='' label="Shop" address="/shop" />
-        <NavButton className='' label="Cart" address="/cart" />
-        <NavButton className='' label="Blog" address="/blog" />
+        <NavButton className="" label="Home" address="/" />
+        <NavButton className="" label="About Us" address="/about" />
+        <NavButton className="" label="Contact Us" address="/contact" />
+        <NavButton className="" label="All Habits" address="/browse-habits" />
+        {user && (
+          <NavButton className="" label="My Habits" address="/my-habits" />
+        )}
+        {user && (
+          <NavButton className="" label="Add Habit" address="/add-habit" />
+        )}
         {user ? (
           <button className="btn bg-black text-white" onClick={HandleLogout}>
             Logout

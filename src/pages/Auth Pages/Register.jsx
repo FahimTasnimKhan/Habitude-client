@@ -5,8 +5,13 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/UseAuth';
 import { fileToBase64, registerUsertoDB } from '../../utils/utilities';
 import { toast } from 'react-hot-toast';
+import { useEffect } from 'react';
+import Aos from 'aos';
 
 export default function RegisterUIOnly() {
+  useEffect(() => {
+    Aos.init({ duration: 900, once: true, easing: 'ease-in-out' });
+  }, []);
   const { createUser } = useAuth();
   // Hook From Code
   const {
@@ -54,12 +59,14 @@ export default function RegisterUIOnly() {
   };
 
   return (
-    <div className="rounded-xl border border-white/20 shadow-lg m-4 p-6 bg-white/10 backdrop-blur-2xl text-white">
+    <div
+      data-aos="fade-up"
+      className="rounded-xl border border-white/20 shadow-lg m-4 p-6 bg-white/10 backdrop-blur-2xl text-white"
+    >
       <div className="flex gap-3">
         <FaUserPlus size={60} />
         <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
       </div>
-
 
       <RegisterForm
         register={register}

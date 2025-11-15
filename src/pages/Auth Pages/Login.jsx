@@ -1,13 +1,21 @@
 import { GoPasskeyFill } from 'react-icons/go';
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
 import InputField from '../../components/Input Field/Input Field';
-import { Link } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/UseAuth';
 import toast from 'react-hot-toast';
+import { useEffect } from 'react';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Login = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    Aos.init({ duration: 900, once: true, easing: 'ease-in-out' });
+  }, []);
   // Hook from react-hook-form
   const {
     register,
@@ -31,6 +39,7 @@ const Login = () => {
 
           // 2️⃣ Reset the form
           reset();
+          navigate('/');
 
           // 3️⃣ Return a message for the success toast
           return 'Successfully Logged In';
@@ -48,6 +57,7 @@ const Login = () => {
   return (
     <div>
       <div
+        data-aos="fade-up"
         className="rounded-xl border border-white/20 shadow-lg m-4 p-6 
              bg-white/10 backdrop-blur-2xl text-white"
       >

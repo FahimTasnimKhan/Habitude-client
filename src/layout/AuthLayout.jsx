@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router';
+import BackToHomeButton from '../components/Shared/BackToHomeButton';
 
 const AuthLayout = () => {
   return (
@@ -24,7 +25,7 @@ const AuthLayout = () => {
             Strive for a Better You.
             <br /> Add, Track and Manage your Habits!
           </p>
-          <Link to="/">{/* <LeafButton></LeafButton> */}</Link>
+          <BackToHomeButton />
         </div>
 
         {/* ---------------------------------------
