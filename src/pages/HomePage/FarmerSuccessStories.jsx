@@ -1,0 +1,218 @@
+import React, { useEffect, useState } from 'react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  TrendingUp,
+  Droplets,
+  DollarSign,
+  Zap,
+} from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+const FarmerSuccessStoriesSection = () => {
+  const [currentStory, setCurrentStory] = useState(0);
+
+  const stories = [
+    {
+      name: 'Sarah Johnson',
+      location: 'Iowa, USA',
+      specialty: 'Habit Building Enthusiast',
+      photo:
+        'https://images.pexels.com/photos/1139743/pexels-photo-1139743.jpeg?auto=compress&cs=tinysrgb&w=300',
+      quote:
+        'Using Habitude has completely transformed my daily routine. I consistently achieve my goals now!',
+      results: [
+        { metric: 'Habits Created', value: '12', icon: TrendingUp },
+        { metric: 'Streak Maintained', value: '7 days', icon: Droplets },
+        { metric: 'Goals Achieved', value: '90%', icon: DollarSign },
+        { metric: 'Time Saved', value: '5 hrs/week', icon: Zap },
+      ],
+    },
+    {
+      name: 'Miguel Rodriguez',
+      location: 'California, USA',
+      specialty: 'Fitness & Productivity',
+      photo:
+        'https://images.pexels.com/photos/1484799/pexels-photo-1484799.jpeg?auto=compress&cs=tinysrgb&w=300',
+      quote:
+        'Habitude keeps me accountable and motivated. I no longer miss my daily habits!',
+      results: [
+        { metric: 'Habits Created', value: '18', icon: TrendingUp },
+        { metric: 'Streak Maintained', value: '14 days', icon: Droplets },
+        { metric: 'Goals Achieved', value: '85%', icon: DollarSign },
+        { metric: 'Time Saved', value: '8 hrs/week', icon: Zap },
+      ],
+    },
+    {
+      name: 'Emily Chen',
+      location: 'Oregon, USA',
+      specialty: 'Mindfulness & Wellness',
+      photo:
+        'https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?auto=compress&cs=tinysrgb&w=300',
+      quote:
+        'Tracking my habits with Habitude has made me more mindful and productive every day.',
+      results: [
+        { metric: 'Habits Created', value: '10', icon: TrendingUp },
+        { metric: 'Streak Maintained', value: '21 days', icon: Droplets },
+        { metric: 'Goals Achieved', value: '95%', icon: DollarSign },
+        { metric: 'Time Saved', value: '6 hrs/week', icon: Zap },
+      ],
+    },
+    {
+      name: 'James Lee',
+      location: 'New York, USA',
+      specialty: 'Professional Development',
+      photo:
+        'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300',
+      quote:
+        'Habitude helps me track my professional goals and daily routines efficiently.',
+      results: [
+        { metric: 'Habits Created', value: '15', icon: TrendingUp },
+        { metric: 'Streak Maintained', value: '30 days', icon: Droplets },
+        { metric: 'Goals Achieved', value: '92%', icon: DollarSign },
+        { metric: 'Time Saved', value: '10 hrs/week', icon: Zap },
+      ],
+    },
+  ];
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+    AOS.refresh();
+  }, []);
+
+  const nextStory = () =>
+    setCurrentStory((prev) => (prev + 1) % stories.length);
+  const prevStory = () =>
+    setCurrentStory((prev) => (prev - 1 + stories.length) % stories.length);
+
+  const currentFarmer = stories[currentStory];
+
+  return (
+    <div
+      id="farmer-stories"
+      className="bg-[#111827] text-gray-100 py-20 md:py-24 overflow-hidden min-h-screen flex items-center"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Header */}
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Success Stories
+          </h2>
+          <p className="text-base sm:text-lg lg:text-xl max-w-3xl mx-auto text-gray-300">
+            Real users, real results. See how Habitude transforms daily
+            routines.
+          </p>
+        </div>
+
+        {/* Story Card */}
+        <div
+          className="rounded-2xl p-6 md:p-12 bg-white/5 border border-white/10 
+          backdrop-blur-md shadow-sm hover:shadow-[0_10px_30px_rgba(239,68,68,0.2)] transition-all duration-300"
+          data-aos="fade-up"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left: User Info */}
+            <div
+              className="text-center lg:text-left"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <div className="flex flex-col lg:flex-row items-center lg:items-start mb-6">
+                <img
+                  src={currentFarmer.photo}
+                  alt={currentFarmer.name}
+                  className="w-24 h-24 rounded-full object-cover mb-4 lg:mb-0 lg:mr-6 border-4 border-[#EF4444] shadow-lg"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold mb-1">
+                    {currentFarmer.name}
+                  </h3>
+                  <p className="mb-1 text-gray-300">{currentFarmer.location}</p>
+                  <p className="text-[#EF4444] font-semibold">
+                    {currentFarmer.specialty}
+                  </p>
+                  <div className="flex items-center justify-center lg:justify-start mt-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-5 w-5 text-yellow-400 fill-current"
+                      />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-400">
+                      5.0 Rating
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <blockquote className="text-lg sm:text-xl italic mb-8 leading-relaxed text-gray-200">
+                "{currentFarmer.quote}"
+              </blockquote>
+
+              <div className="flex justify-center lg:justify-start space-x-4">
+                <button
+                  onClick={prevStory}
+                  className="bg-white/10 border border-white/20 text-gray-100 p-3 rounded-full hover:bg-[#EF4444] hover:text-white shadow-lg transition-all duration-300"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={nextStory}
+                  className="bg-[#EF4444] text-white p-3 rounded-full hover:bg-[#dc2626] shadow-lg transition-all duration-300"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Results */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
+              {currentFarmer.results.map((result, index) => {
+                const Icon = result.icon;
+                return (
+                  <div
+                    key={index}
+                    className="rounded-xl p-4 sm:p-6 text-center bg-white/5 border border-white/10 
+                    backdrop-blur-md hover:shadow-[0_10px_30px_rgba(239,68,68,0.2)] transition-all duration-300"
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100}
+                  >
+                    <div className="bg-[#EF4444]/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Icon className="h-6 w-6 text-[#EF4444]" />
+                    </div>
+                    <p className="text-2xl font-bold text-white mb-1">
+                      {result.value}
+                    </p>
+                    <p className="text-sm text-gray-300">{result.metric}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Dots Navigation */}
+          <div className="flex justify-center mt-8" data-aos="fade-up">
+            {stories.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentStory(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 mx-1 ${
+                  index === currentStory ? 'bg-[#EF4444]' : 'bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FarmerSuccessStoriesSection;

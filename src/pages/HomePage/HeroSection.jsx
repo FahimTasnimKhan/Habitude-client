@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowRight, CheckSquare, Bell, BarChart2, Star } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import heroImage from '../../assets/Logo/hero-farmer.jpg';
+import heroImage from '../../assets/Logo/hero-gym.webp';
 import { Link } from 'react-router';
 import QuickStats from './QuickStats';
 

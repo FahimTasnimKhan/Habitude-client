@@ -31,7 +31,7 @@ const FeaturedShowcase = ({
           className="w-full h-[480px] object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-green-800/70 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black-800/70 via-transparent to-transparent"></div>
         <div className="absolute bottom-6 left-6 text-white">
           <h3 className="text-2xl font-bold mb-2">Smart Marketplace</h3>
           <p className="text-white/90 mb-3">
@@ -61,12 +61,12 @@ const FeaturedShowcase = ({
             alt="Successful Farmers"
             className="w-full h-64 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-700/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black-900/80 to-transparent"></div>
           <div className="absolute inset-0 flex items-center">
             <div className="p-6 text-white">
               <h3 className="text-xl font-bold mb-2">Success Stories</h3>
               <p className="text-white/90 text-sm">
-                Meet farmers who transformed their lives with our platform.
+                Meet our Users who transformed their lives with our platform.
               </p>
             </div>
           </div>

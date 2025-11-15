@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 
-import marketplaceImage from '../../assets/Logo/marketplace.jpg';
-import farmersImage from '../../assets/Logo/farmers-success.jpg';
-
+import marketplaceImage from '../../assets/Logo/marketplace.webp';
+import farmersImage from '../../assets/Logo/success.jpg';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -64,7 +63,6 @@ const services = [
     color: 'bg-green-500',
   },
 ];
-
 
 const Services = () => {
   // Initialize AOS with same config as HowItWorks for consistency

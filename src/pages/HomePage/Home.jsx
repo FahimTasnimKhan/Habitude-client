@@ -1,6 +1,9 @@
+import BecomePartner from './BecomeAPartner';
+import FarmerSuccessStoriesSection from './FarmerSuccessStories';
 import Features from './Features';
 import HeroSection from './HeroSection';
 import HowItWorks from './HowItWorks';
+import OurTrustedPartnersSection from './OurTrustedPartners';
 import Services from './Services';
 
 const Home = () => {
@@ -13,10 +16,10 @@ const Home = () => {
       <HowItWorks />
       {/* <AdvertisementSection /> */}
       <Services />
-      {/* <LatestReviews />
+      {/* <LatestReviews /> */}
       <FarmerSuccessStoriesSection />
       <OurTrustedPartnersSection />
-      <BecomePartner /> */}
+      <BecomePartner />
     </>
   );
 };

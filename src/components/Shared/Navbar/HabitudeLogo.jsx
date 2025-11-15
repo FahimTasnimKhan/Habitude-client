@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import logo from '../../assets/Logo/Rootfarming.png';
+import logo from '../../../assets/Logo/Rootfarming.png';
 
 const HabitudeLogo = () => {
   return (
