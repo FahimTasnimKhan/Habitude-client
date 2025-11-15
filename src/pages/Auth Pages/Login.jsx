@@ -1,8 +1,10 @@
 import { GoPasskeyFill } from 'react-icons/go';
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
 import InputField from '../../components/Input Field/Input Field';
+import { Link, useNavigate } from 'react-router';
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div
@@ -68,11 +70,13 @@ const Login = () => {
 
         {/* Register Navigation */}
         <p className="text-center text-[#E6EAD0]/80 mt-2">
-          Don't have an account?
-          <span className="font-medium link text-white hover:underline cursor-pointer">
-            {' '}
+          Don't have an account?{' '}
+          <Link
+            to={'/auth/register'}
+            className="font-medium link text-white hover:underline cursor-pointer"
+          >
             Register
-          </span>
+          </Link>
         </p>
       </div>
     </div>
