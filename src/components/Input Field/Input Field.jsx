@@ -7,7 +7,19 @@ const InputField = ({
   register,
   errors,
   validationRules,
+  onChange,
 }) => {
+  const {
+    ref,
+    onChange: rhfOnChange,
+    ...rest
+  } = register(name, validationRules);
+
+  const handleChange = (e) => {
+    rhfOnChange(e); // notify react-hook-form
+    if (onChange) onChange(e); // run your custom handler
+  };
+
   return (
     <div className="mb-2">
       <label htmlFor={name} className="block text-sm font-medium mb-1">
@@ -25,10 +37,12 @@ const InputField = ({
           id={name}
           type={type}
           placeholder={placeholder}
+          onChange={handleChange} // merged handler
+          ref={ref} // important for react-hook-form
+          {...rest}
           className={`block w-full ${
             Icon ? 'pl-10' : 'pl-3'
           } pr-3 py-2 border rounded-md bg-white/10 text-white`}
-          {...register(name, validationRules)}
         />
       </div>
 

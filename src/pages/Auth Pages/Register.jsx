@@ -60,7 +60,7 @@ export default function RegisterUIOnly() {
         <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
       </div>
 
-      {/* UI‑Only Register Form (inputs handled inside component) */}
+
       <RegisterForm
         register={register}
         handleSubmit={handleSubmit}

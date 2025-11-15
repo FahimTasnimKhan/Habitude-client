@@ -12,6 +12,7 @@ import { PuffLoader, BounceLoader } from 'react-spinners';
 import { GiArchiveRegister } from 'react-icons/gi';
 import InputField from '../../Input Field/Input Field';
 import { Controller } from 'react-hook-form';
+import { useState } from 'react';
 
 // ---------------------------------------------------------------------------
 // RegisterForm Component - Used In the Register Page
@@ -22,10 +23,25 @@ const RegisterForm = ({
   errors,
   isSubmitting,
   onSubmit,
-  uploadedUserPhoto,
-  uploadingPhoto,
+
   uiOnly = false,
 }) => {
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [uploadedUserPhoto, setuploadedUserPhoto] = useState(null);
+  const HandleUploadPhoto = async (file) => {
+    setUploadingPhoto(true);
+    try {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => setuploadedUserPhoto(reader.result);
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploadingPhoto(false);
+    }
+  };
+
   if (uiOnly) {
     return (
       <div>
@@ -194,6 +210,10 @@ const RegisterForm = ({
                     return 'File size must be < 2MB';
                   return true;
                 },
+              }}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                HandleUploadPhoto(file); // update preview
               }}
             />
           </div>
