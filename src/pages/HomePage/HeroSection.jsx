@@ -5,7 +5,7 @@ import 'aos/dist/aos.css';
 import heroImage from '../../assets/Logo/hero-gym.webp';
 import { Link } from 'react-router';
 import QuickStats from './QuickStats';
-
+import Typewriter from 'typewriter-effect';
 const HeroSection = () => {
   useEffect(() => {
     AOS.init({
@@ -78,11 +78,29 @@ const HeroSection = () => {
             {/* Title */}
             <h1
               id="hero-heading"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-snug sm:leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-4 leading-snug sm:leading-tight"
               data-aos="fade-right"
             >
               Build Regularity, <br />
-              <span className="text-[#EF4444]">Celebrate Wins</span>
+              <span className="text-[#EF4444] inline-block">
+                <Typewriter
+                  options={{
+                    strings: [
+                      'Celebrate Wins',
+                      'Motivate Daily',
+                      'Strengthen Habits',
+                      'Transform Routines',
+                      'Achieve Progress',
+                      'Build Consistency',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 60,
+                    deleteSpeed: 40,
+                    pauseFor: 1500,
+                  }}
+                />
+              </span>
             </h1>
 
             {/* Description */}

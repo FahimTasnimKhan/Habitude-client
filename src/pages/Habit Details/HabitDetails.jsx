@@ -184,6 +184,41 @@ const HabitDetails = () => {
             </div>
           </div>
 
+          {/* PROGRESS BAR SECTION */}
+          <div className="mt-10">
+            <h3 className="text-xl font-bold text-white mb-3">
+              📊 Monthly Progress
+            </h3>
+
+            {(() => {
+              const days = ProgressData?.DaysCompleted || 0;
+              const percentage = Math.min((days / 30) * 100, 100);
+
+              return (
+                <div className="w-full">
+                  {/* Label */}
+                  <div className="flex justify-between mb-1">
+                    <span className="text-gray-300 text-sm">
+                      {days} / 30 days
+                    </span>
+                    <span className="text-gray-300 text-sm">
+                      {Math.round(percentage)}%
+                    </span>
+                  </div>
+
+                  {/* Bar Background */}
+                  <div className="w-full h-5 bg-white/10 rounded-full backdrop-blur-md border border-white/10 overflow-hidden">
+                    {/* Filling */}
+                    <div
+                      className="h-full bg-gradient-to-r from-green-400 to-green-600 shadow-lg shadow-green-400/30 transition-all duration-700"
+                      style={{ width: `${percentage}%` }}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+
           {/* ACTION BUTTON */}
           <div className="mt-10 text-center">
             {(() => {
