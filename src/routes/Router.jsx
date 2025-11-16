@@ -8,6 +8,7 @@ import Register from '../pages/Auth Pages/Register';
 import DashboardLayout from '../layout/DashboardLayout';
 import AddHabit from '../pages/DashboardPages/AddHabit';
 import BrowseHabits from '../pages/Browse Habits/BrowseHabits';
+import MyHabits from '../pages/DashboardPages/MyHabits';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'add-habit',
         Component: AddHabit,
+      },
+      {
+        path: 'my-habits',
+        Component: MyHabits,
       },
     ],
   },

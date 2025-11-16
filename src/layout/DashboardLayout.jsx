@@ -1,4 +1,4 @@
-import { House, PlusCircle, Settings } from 'lucide-react';
+import { Calendar, House, PlusCircle, Settings } from 'lucide-react';
 import Navbar from '../components/Shared/Navbar/Navbar';
 import { Outlet, useNavigate } from 'react-router';
 import Footer from '../components/Shared/Footer';
@@ -141,6 +141,33 @@ const DashboardLayout = () => {
                   </svg> */}
                   <PlusCircle size={18} />
                   <span className="is-drawer-close:hidden">Add Habit</span>
+                </button>
+              </li>
+              {/* Add Habit item */}
+              <li>
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Add-Habit"
+                  onClick={() => navigate('/dashboard/my-habits')}
+                >
+                  {/* Settings icon */}
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-4"
+                  >
+                    <path d="M20 7h-9"></path>
+                    <path d="M14 17H5"></path>
+                    <circle cx="17" cy="17" r="3"></circle>
+                    <circle cx="7" cy="7" r="3"></circle>
+                  </svg> */}
+                  <Calendar size={18} />
+                  <span className="is-drawer-close:hidden">My Habits</span>
                 </button>
               </li>
             </ul>
