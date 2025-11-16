@@ -29,15 +29,18 @@ const HabitDetails = () => {
       UserId: dbUser?._id,
       HabitId: HabitData?._id,
     };
+
     console.log('Yo here is the Payload 🚚: ', payload);
-    try {
-      await axiosSecure.post('/api/progress', payload);
-      toast.success('Habit Marked as Completed');
-      refetch();
-    } catch (error) {
-      console.log(error);
-    }
+
+    await toast.promise(axiosSecure.post('/api/progress', payload), {
+      loading: 'Marking habit as complete...',
+      success: 'Habit marked as completed!',
+      error: 'Failed to mark habit. Try again!',
+    });
+
+    refetch();
   };
+
   if (isPending) {
     return (
       <div data-theme="dark" className="bg-black min-h-screen pt-15 pb-20">
