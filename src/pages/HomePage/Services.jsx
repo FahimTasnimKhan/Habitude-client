@@ -1,71 +1,65 @@
 import React, { useEffect } from 'react';
-
-import marketplaceImage from '../../assets/Logo/marketplace.webp';
-import farmersImage from '../../assets/Logo/success.jpg';
-
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ServiceCard from './ServiceCard';
-import FeaturedShowcase from './FeaturedShowcase';
-import { Bell, CheckSquare, LineChart, Target } from 'lucide-react';
+import { Target, Brain, Sparkles, TrendingUp } from 'lucide-react';
 
-const services = [
+const benefits = [
   {
-    icon: CheckSquare,
-    title: 'Habit Creation',
+    icon: Target,
+    title: 'Better Focus',
     description:
-      'Add new habits to your daily routine and start building consistency and productivity.',
+      'Building small daily habits sharpens your ability to stay consistent and avoid distraction.',
     features: [
-      'Custom Habit Setup',
-      'Multiple Categories',
-      'Daily / Weekly Goals',
-      'Quick Add',
-    ],
-    color: 'bg-red-500',
-  },
-  {
-    icon: Bell,
-    title: 'Smart Reminders',
-    description:
-      'Never miss a habit with intelligent notifications and scheduling options.',
-    features: [
-      'Daily Reminders',
-      'Push Notifications',
-      'Custom Schedules',
-      'Snooze / Repeat',
-    ],
-    color: 'bg-yellow-500',
-  },
-  {
-    icon: LineChart,
-    title: 'Progress Analytics',
-    description:
-      'Track your progress and visualize your performance with insightful charts and graphs.',
-    features: [
-      'Daily / Weekly Stats',
-      'Completion Charts',
-      'Streak Analysis',
-      'Habit Trends',
+      'Improved Discipline',
+      'Clear Goal Setting',
+      'Stronger Routine',
+      'Reduced Procrastination',
     ],
     color: 'bg-blue-500',
   },
   {
-    icon: Target,
-    title: 'Streak Tracking',
+    icon: Brain,
+    title: 'Reduced Stress',
     description:
-      'Monitor streaks and milestones to stay motivated and maintain long-term consistency.',
+      'Healthy habits help regulate your mind, reduce mental clutter, and create a calmer lifestyle.',
     features: [
-      'Longest Streaks',
-      'Goal Milestones',
-      'Achievements & Badges',
-      'Motivational Alerts',
+      'Mindful Routines',
+      'Healthier Lifestyle',
+      'Mental Clarity',
+      'Lower Burnout',
+    ],
+    color: 'bg-purple-500',
+  },
+  {
+    icon: Sparkles,
+    title: 'Improved Well-Being',
+    description:
+      'Small improvements compound over time, boosting your overall happiness and self-confidence.',
+    features: [
+      'Health Boost',
+      'Better Sleep',
+      'Daily Motivation',
+      'Positive Mindset',
+    ],
+    color: 'bg-pink-500',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Trackable Growth',
+    description:
+      'See your streaks grow, measure progress, and stay motivated with clear habit analytics.',
+    features: [
+      'Streak History',
+      'Habit Completion',
+      'Visual Progress Charts',
+      'Performance Insights',
     ],
     color: 'bg-green-500',
   },
 ];
 
-const Services = () => {
-  // Initialize AOS with same config as HowItWorks for consistency
+const WhyBuildHabits = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -77,40 +71,32 @@ const Services = () => {
 
   return (
     <div
-      id="services"
+      id="why-build-habits"
       className="md:py-24 py-16 min-h-screen flex items-center overflow-hidden bg-[#111827] text-gray-100"
     >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16" data-aos="fade-up">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug">
-            Empowering Every Step of Agriculture
+            Why Build Habits?
           </h2>
           <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
-            From marketplace to smart farming — discover our complete ecosystem
-            built for modern agriculture.
+            Strong habits build strong lives. Discover how small daily actions
+            lead to long-term transformation.
           </p>
         </div>
 
-        {/* Service Cards */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-20">
-          {services.map((service, idx) => (
+        {/* Benefit Cards */}
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
+          {benefits.map((benefit, idx) => (
             <div key={idx} data-aos="zoom-in" data-aos-delay={idx * 150}>
-              <ServiceCard {...service} />
+              <ServiceCard {...benefit} />
             </div>
           ))}
-        </div>
-
-        {/* Showcase Section */}
-        <div data-aos="fade-up" data-aos-delay={100}>
-          <FeaturedShowcase
-            marketplaceImage={marketplaceImage}
-            farmersImage={farmersImage}
-          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Services;
+export default WhyBuildHabits;
