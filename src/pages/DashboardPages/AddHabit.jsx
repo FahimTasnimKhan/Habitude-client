@@ -28,18 +28,18 @@ const AddHabit = () => {
       reminderTime: data?.time,
       isPublic: data?.isPublic === 'Yes' ? true : false,
       creatorID: dbUser?._id,
+      image: data?.image,
     };
 
     console.log('🚚 Your Add Habit Payload is: ', payload);
 
-    toast
-      .promise(axiosSecure.post('/api/habits', payload), {
-        pending: 'Adding your habit...',
-        success: 'Habit added successfully 👌',
-        error: 'Failed to add habit 🤯',
-      })
-      .then(() => reset())
-      .catch((err) => console.error(err));
+    await toast.promise(() => axiosSecure.post('/api/habits', payload), {
+      pending: 'Adding your habit...',
+      success: 'Habit added successfully 👌',
+      error: 'Failed to add habit 🤯',
+    });
+
+    reset();
   };
 
   if (isUserLoading)

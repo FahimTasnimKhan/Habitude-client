@@ -7,12 +7,16 @@ import Login from '../pages/Auth Pages/Login';
 import Register from '../pages/Auth Pages/Register';
 import DashboardLayout from '../layout/DashboardLayout';
 import AddHabit from '../pages/DashboardPages/AddHabit';
+import BrowseHabits from '../pages/Browse Habits/BrowseHabits';
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: RootLayout,
-    children: [{ index: true, Component: Home }],
+    children: [
+      { index: true, Component: Home },
+      { path: 'browse-habits', Component: BrowseHabits },
+    ],
   },
   {
     path: '/dashboard',
