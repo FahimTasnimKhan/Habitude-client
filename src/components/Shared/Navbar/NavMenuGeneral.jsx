@@ -28,7 +28,11 @@ const NavMenuGeneral = () => {
           <NavButton className="" label="My Habits" address="/my-habits" />
         )}
         {user && (
-          <NavButton className="" label="Add Habit" address="/add-habit" />
+          <NavButton
+            className=""
+            label="Add Habit"
+            address="/dashboard/add-habit"
+          />
         )}
         {user ? (
           <button className="btn bg-black text-white" onClick={HandleLogout}>

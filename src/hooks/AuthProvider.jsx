@@ -53,6 +53,7 @@ const AuthProvider = ({ children }) => {
   // Auth state listener (single source of truth for `user`)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUserLoading(true);
       setUser(currentUser);
       console.log('The user has been set and here is the user:', currentUser);
 
@@ -82,7 +83,14 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authInfo = useMemo(
-    () => ({ user, isUserLoading: UesrLoading, createUser, signIn, logout }),
+    () => ({
+      user,
+      isUserLoading: UesrLoading,
+      dbUser,
+      createUser,
+      signIn,
+      logout,
+    }),
     [user, UesrLoading, createUser, signIn, logout]
   );
 

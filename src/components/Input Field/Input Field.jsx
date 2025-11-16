@@ -8,6 +8,8 @@ const InputField = ({
   errors,
   validationRules,
   onChange,
+  disabled = false,
+  defaultValue = '',
 }) => {
   const {
     ref,
@@ -38,6 +40,8 @@ const InputField = ({
           type={type}
           placeholder={placeholder}
           onChange={handleChange} // merged handler
+          defaultValue={defaultValue}
+          disabled={disabled}
           ref={ref} // important for react-hook-form
           {...rest}
           className={`block w-full ${
