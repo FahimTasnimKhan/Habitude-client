@@ -1,35 +1,62 @@
+import { useNavigate } from 'react-router';
 import HabitudeLogo from './HabitudeLogo';
 import NavButton from './NavButton';
+import useAuth from '../../../hooks/UseAuth';
+import toast from 'react-hot-toast';
 
 const HamburgerSidebar = () => {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const HandleLogout = async () => {
+    try {
+      logout();
+      console.log('Logged Out successfully');
+      toast.success('Logged Out Successfully');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <div className="flex flex-col items-start pl-2 pt-6 bg-gray-200 h-screen">
+      <div className="flex flex-col items-start pl-2 pt-6 bg-black text-white h-screen">
         {/* 1. Logo Section------------ */}
         <HabitudeLogo />
 
         <hr className="w-2/3 my-4 flex justify-center border-gray-400" />
 
         {/* 2. Links Section------------ */}
-        <NavButton label="Home" address="/" />
-        <NavButton label="About Us" address="/about" />
-        <NavButton label="Contact Us" address="/contact" />
-        <NavButton label="Shop" address="/shop" />
-        <NavButton label="Cart" address="/cart" />
-        <NavButton label="Blog" address="/blog" />
+        <NavButton className="" label="Home" address="/" />
+        <NavButton className="" label="About Us" address="/about" />
+        <NavButton className="" label="Contact Us" address="/contact" />
+        <NavButton className="" label="All Habits" address="/browse-habits" />
+        {user && (
+          <NavButton
+            className=""
+            label="My Habits"
+            address="/dashboard/my-habits"
+          />
+        )}
+        {user && (
+          <NavButton
+            className=""
+            label="Add Habit"
+            address="/dashboard/add-habit"
+          />
+        )}
+        {user ? (
+          <button className="btn bg-black text-white ml-4" onClick={HandleLogout}>
+            Logout
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('/auth')}
+            className="btn bg-black text-white ml-4"
+          >
+            Login
+          </button>
+        )}
 
-        <hr className="w-2/3 border-gray-400 my-4" />
-
-        {/* 3. Dashboard & Profile Section------------ */}
-        <NavButton label="Dashboard" address="/dashboard" />
-        <NavButton label="Profile" address="/profile" />
-
-        <hr className="w-2/3 border-gray-400 my-4" />
-
-        {/* 4. Settings Section------------ */}
-        {/* <LanguageButton /> */}
-        <div className="pl-3">{/* <ThemeSwitcher /> */}</div>
-        {/* <AuthenticationButton /> */}
+        
       </div>
     </>
   );
