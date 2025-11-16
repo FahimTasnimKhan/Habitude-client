@@ -2,8 +2,16 @@ import { Outlet } from 'react-router';
 
 import Footer from '../components/Shared/Footer';
 import Navbar from '../components/Shared/Navbar/Navbar';
+import useAuth from '../hooks/UseAuth';
 
 const RootLayout = () => {
+  const { isUserLoading } = useAuth();
+  if (isUserLoading)
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-black text-white">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
   return (
     <>
       <div>

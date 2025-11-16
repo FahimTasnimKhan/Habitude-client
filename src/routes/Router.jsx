@@ -9,6 +9,8 @@ import DashboardLayout from '../layout/DashboardLayout';
 import AddHabit from '../pages/DashboardPages/AddHabit';
 import BrowseHabits from '../pages/Browse Habits/BrowseHabits';
 import MyHabits from '../pages/DashboardPages/MyHabits';
+import UpdateHabit from '../pages/DashboardPages/UpdateHabit';
+import HabitDetails from '../pages/Habit Details/HabitDetails';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'browse-habits', Component: BrowseHabits },
+      { path: 'habit-details/:id', Component: HabitDetails },
     ],
   },
   {
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'my-habits',
         Component: MyHabits,
+      },
+      {
+        path: 'update-habit/:id',
+        Component: UpdateHabit,
       },
     ],
   },

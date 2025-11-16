@@ -25,7 +25,7 @@ const NavMenuGeneral = () => {
         <NavButton className="" label="Contact Us" address="/contact" />
         <NavButton className="" label="All Habits" address="/browse-habits" />
         {user && (
-          <NavButton className="" label="My Habits" address="/my-habits" />
+          <NavButton className="" label="My Habits" address="/dashboard/my-habits" />
         )}
         {user && (
           <NavButton

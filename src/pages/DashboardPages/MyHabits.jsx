@@ -3,10 +3,13 @@ import { Timer, Edit, Trash2, Eye } from 'lucide-react';
 import useAuth from '../../hooks/UseAuth';
 import UseAxiosSecure from '../../axios/UseAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const MyHabits = () => {
   const { dbUser } = useAuth();
   const axiosSecure = UseAxiosSecure();
+  const navigate = useNavigate();
   const [myHabits, setMyHabits] = useState([]);
 
   const { data: MyHabitsData = [], isPending } = useQuery({
@@ -24,6 +27,32 @@ const MyHabits = () => {
       setMyHabits(MyHabitsData.data);
     }
   }, [MyHabitsData]);
+
+  const HandleDelete = async (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.delete(`/api/habits/${id}`);
+          setMyHabits((prev) => prev.filter((habit) => habit?._id != id));
+          Swal.fire({
+            title: 'Deleted!',
+            text: `Your Habit has been successfully deleted.`,
+            icon: 'success',
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
+  };
 
   if (isPending) {
     return (
@@ -102,6 +131,9 @@ const MyHabits = () => {
                       <div className="flex gap-2 justify-center">
                         <button
                           className="btn btn-sm btn-info btn-outline gap-1"
+                          onClick={() => {
+                            navigate(`/habit-details/${habit?._id}`);
+                          }}
                           title="View Details"
                         >
                           <Eye size={16} />
@@ -110,6 +142,9 @@ const MyHabits = () => {
                         <button
                           className="btn btn-sm btn-warning btn-outline gap-1"
                           title="Update Habit"
+                          onClick={() =>
+                            navigate(`/dashboard/update-habit/${habit?._id}`)
+                          }
                         >
                           <Edit size={16} />
                           Update
@@ -117,6 +152,7 @@ const MyHabits = () => {
                         <button
                           className="btn btn-sm btn-error btn-outline gap-1"
                           title="Delete Habit"
+                          onClick={() => HandleDelete(habit?._id)}
                         >
                           <Trash2 size={16} />
                           Delete

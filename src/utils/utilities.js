@@ -18,3 +18,16 @@ export const fileToBase64 = (file) => {
     reader.onerror = (error) => reject(error);
   });
 };
+
+export function convertTo24Hour(time) {
+  const [timePart, modifier] = time.split(' ');
+  let [hours, minutes] = timePart.split(':');
+
+  if (modifier === 'PM' && hours !== '12') {
+    hours = String(Number(hours) + 12);
+  }
+  if (modifier === 'AM' && hours === '12') {
+    hours = '00';
+  }
+  return `${hours}:${minutes}`;
+}

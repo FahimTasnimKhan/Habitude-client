@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const ImageUploader = ({ register, setValue, name, errors }) => {
+const ImageUploader = ({ register, setValue, name, errors, defaultPhoto }) => {
   const [uploadedPhoto, setUploadedPhoto] = useState(null);
+
+  useEffect(() => {
+    if (defaultPhoto) setUploadedPhoto(defaultPhoto);
+  }, [defaultPhoto]);
 
   // Convert file to base64 string
   const fileToBase64 = (file) =>
