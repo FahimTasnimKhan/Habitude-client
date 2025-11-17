@@ -34,8 +34,8 @@ const AuthProvider = ({ children }) => {
     try {
       const cred = await signInWithEmailAndPassword(auth, email, password);
       return cred;
-    } finally {
-      setUserLoading(false);
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 

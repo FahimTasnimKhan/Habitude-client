@@ -5,13 +5,14 @@ import Navbar from '../components/Shared/Navbar/Navbar';
 import useAuth from '../hooks/UseAuth';
 
 const RootLayout = () => {
-  const { isUserLoading } = useAuth();
+  const { isUserLoading, dbUser } = useAuth();
   if (isUserLoading)
     return (
       <div className="min-h-screen flex justify-center items-center bg-black text-white">
         <span className="loading loading-ring loading-xl"></span>
       </div>
     );
+  console.log('DbUser fetched from the backend from Root Layout : ', dbUser);
   return (
     <>
       <div>

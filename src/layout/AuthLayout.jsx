@@ -3,13 +3,14 @@ import BackToHomeButton from '../components/Shared/BackToHomeButton';
 import useAuth from '../hooks/UseAuth';
 
 const AuthLayout = () => {
-  const { isUserLoading } = useAuth();
+  const { isUserLoading, dbUser } = useAuth();
   if (isUserLoading)
     return (
       <div className="min-h-screen flex justify-center items-center bg-black text-white">
         <span className="loading loading-ring loading-xl"></span>
       </div>
     );
+  console.log('DbUser from the backend fetched: ', dbUser);
   return (
     <div>
       <div className="relative flex flex-col md:flex-row items-center gap-10 min-h-screen w-full bg-[url(../../src/assets/login.jpg)] bg-gray-700 bg-cover bg-center bg-no-repeat">

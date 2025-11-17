@@ -7,15 +7,21 @@ import toast from 'react-hot-toast';
 const HabitDetails = () => {
   const { id } = useParams();
   const { dbUser } = useAuth();
+  console.log(dbUser);
   const axiosSecure = UseAxiosSecure();
-  //   Fetching Data
+
+  // -------------------------
+  // FIX 1: Wait for dbUser._id
+  // -------------------------
   const { data, isPending, refetch } = useQuery({
-    queryKey: ['dashboard', 'users+books', id],
+    queryKey: ['dashboard', 'users+books', id, dbUser?._id],
+    enabled: !!dbUser?._id,
     queryFn: async () => {
       const [HabitRes, ProgressRes] = await Promise.all([
         axiosSecure.get(`/api/habits/${id}`),
-        axiosSecure.get(`/api/progress/${dbUser?._id}/${id}`),
+        axiosSecure.get(`/api/progress/${dbUser._id}/${id}`),
       ]);
+
       return {
         HabitData: HabitRes.data?.data,
         ProgressData: ProgressRes.data?.data,
@@ -23,14 +29,17 @@ const HabitDetails = () => {
     },
     staleTime: 30_000,
   });
-  //   Handle Button
+
+  // -------------------------
+  // Handle Mark Completed
+  // -------------------------
   const HandleMarkAsComplete = async () => {
+    const HabitData = data?.HabitData;
+
     const payload = {
       UserId: dbUser?._id,
       HabitId: HabitData?._id,
     };
-
-    console.log('Yo here is the Payload 🚚: ', payload);
 
     await toast.promise(axiosSecure.post('/api/progress', payload), {
       loading: 'Marking habit as complete...',
@@ -38,10 +47,10 @@ const HabitDetails = () => {
       error: 'Failed to mark habit. Try again!',
     });
 
-    refetch();
+    await refetch(); // ensure UI updates with fresh progress
   };
 
-  if (isPending) {
+  if (isPending || !data) {
     return (
       <div data-theme="dark" className="bg-black min-h-screen pt-15 pb-20">
         {/* BANNER SKELETON */}
@@ -102,10 +111,18 @@ const HabitDetails = () => {
     );
   }
 
-  const HabitData = data?.HabitData;
-  const ProgressData = data?.ProgressData;
-  console.log(HabitData);
-  console.log(ProgressData);
+  const HabitData = data.HabitData;
+  const ProgressData = data.ProgressData;
+
+  // -------------------------
+  // FIX 2: Accurate today's check
+  // -------------------------
+  const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+  const alreadyCompleted = ProgressData?.progresses?.some((p) => {
+    const pDate = new Date(p.date).toISOString().split('T')[0];
+    return pDate === today;
+  });
+
   return (
     <div data-theme="dark" className="bg-black min-h-screen pt-15 pb-20">
       {/* BANNER IMAGE */}
@@ -221,36 +238,27 @@ const HabitDetails = () => {
 
           {/* ACTION BUTTON */}
           <div className="mt-10 text-center">
-            {(() => {
-              const today = new Date().toDateString();
-              const alreadyCompleted = ProgressData?.progresses?.some(
-                (p) => new Date(p.date).toDateString() === today
-              );
-
-              return alreadyCompleted ? (
-                <button
-                  className="
+            {alreadyCompleted ? (
+              <button
+                className="
                   px-6 py-3 rounded-xl font-semibold text-white 
                   bg-green-700/70 border border-green-500 
                   cursor-not-allowed backdrop-blur-sm
                 "
-                >
-                  ✓ You have already completed this habit today
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    HandleMarkAsComplete();
-                  }}
-                  className="
+              >
+                ✓ You have already completed this habit today
+              </button>
+            ) : (
+              <button
+                onClick={HandleMarkAsComplete}
+                className="
                   px-6 py-3 rounded-xl font-semibold text-black 
                   bg-green-400 hover:bg-green-300 transition
                 "
-                >
-                  Mark this Habit as Completed
-                </button>
-              );
-            })()}
+              >
+                Mark this Habit as Completed
+              </button>
+            )}
           </div>
         </div>
       </div>

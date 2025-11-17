@@ -7,13 +7,15 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 
 const MyHabits = () => {
-  const { dbUser } = useAuth();
+  const { dbUser, isUserLoading } = useAuth();
   const axiosSecure = UseAxiosSecure();
   const navigate = useNavigate();
   const [myHabits, setMyHabits] = useState([]);
 
+
   const { data: MyHabitsData = [], isPending } = useQuery({
     queryKey: ['myhabits', dbUser?._id],
+    enabled: !!dbUser?._id, // <--- the fix
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/api/habits/get-user-habits/${dbUser._id}`

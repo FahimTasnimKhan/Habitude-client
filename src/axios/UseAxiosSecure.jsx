@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://habitude-server-seven.vercel.app',
   timeout: 10000,
   headers: { 'X-Custom-Header': 'foobar' },
 });
